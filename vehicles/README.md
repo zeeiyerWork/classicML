@@ -1,22 +1,23 @@
-This is a readme file for the data analysis of a coupons.csv (pushing coupons to drivers for various eating/drinking establishments on their route) using python libraries - Pandas, Seaborn, Matplotlib etc.
-The idea is to slice and dice the data and look at subgroups that accept coupons more readily.
-This way one can be more targeted in terms of pushing coupons to the right segment (where segment is defined as a collection of 1 or more attributes of the data set)
-
+This is a readme file for the data analysis of a vehicles.csv (a data set of used vehicle attributes and their associate price across states in the US). Analysis uses various python libraries - Pandas, Seaborn, Matplotlib, scikit-learn etc. The goal is to understand how prices relate to what features - and if all ducks line up in a row, then use the model to predict future car prices based on attributes. 
 **
-As a start the notebook zeeiyerWork-Module5-prompt.ipnyb 
-- loads the coupons.csv file (please change the code based on the relative location of the coupons file)
-- Explores the data sets.
-- And executes the analysis for just BAR Coupons.
-- And executes something similar for high end restaruant Coupons (20-50$ price range)
-
+As a start (note the heavy use of functions with parametrization so one can experiment a bit with simple code changes - i.e. function parameters)
+- The notebook is at VehicleDataModule11_final.ipnyb.ipnyb 
+- It features several functions to EXPLORE the DATA
+  -- dataframe_basicExploration (df.info(), df.describe(), Count of Nulls/column, Histograms where appropriate to understand how the values distribute across the data set, Corr matrix)
+  -- dataframe_specificExploration (based on above, exploration specific to this dataset - i.e. logs of values etc.)
+- It features functions (common) to MANIPULATE/CLEANSE the DATA
+  -- dropping null columns, columns with high cardinality and columns with single values,
+  -- using more than a SimpleImputer to a more sophisticated impute function
+  -- removing rank outliers (i.e. row based cleansing)
+- the final Block is to
+  -- create a Preprocessor (StandardScaler for Numerical and OneHotEncoding for Categorical)
+  -- Trying different pipelines/models (Linear Reg of Degree=1, Lasso Constraints, XGBoost and RandomForestRegression)
+  -- Using the function evaluate_Model to compare the various outcomes.
 **
-Further analysis is about slicing and dicing the variables to find high-coupon acceptance groups across coupon segments for targeted marketing.
-**
-Needed files:
+More could be done in terms of trying
+- Data acquisition and cleansing (which is to be handled before the data is presented to the Datascience team) - lots of important features have nulls (e.g vehicle condition, size), lots of features we know from common knowledge as important are missing too (e.g. accident history, internal systems status (A/C, Entertainment systems etc.))
+- Of course, more could be done with the existing data to explore more data manipulation and other models - so we predict price better, but the above data issues cannot be de-emphasized since Garbage-in-Garbage-out.
+- **Needed files**
 - NOTES: README.md
-- CODE: zeeiyerWork-Module5-prompt.ipynb (has suitable notes for additional guidance)
-- DATA: coupons.csv (needs to be relocated in the right place to ensure that you do not encounter "file-not-found" errors)
-
-DATASET NOTE: 
-- 74 duplicate rows that can be safely removed.
-- Further dropna results in the majority of rows being dropped since seems like cars have only 108 entries out of the total dataset in excess of 12000 rows. Hence using fill.
+- CODE: VehicleDataModule11_final.ipnyb(has suitable notes for additional guidance)
+- DATA: vehicles.csv (needs to be relocated in the right place to ensure that you do not encounter "file-not-found" errors - in the data directory, but the notebook uses a HTTP url to acccess it)
